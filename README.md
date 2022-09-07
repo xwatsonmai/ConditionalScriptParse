@@ -21,24 +21,37 @@
  go get -u github.com/xwatsonmai/ConditionalScriptParse/parse@v1.0.1 
 ```
 ### 2.在代码中使用
+
 ```golang
 package main
 
 import (
 	"fmt"
 	"github.com/xwatsonmai/ConditionalScriptParse/parse"
+	"strconv"
+	"strings"
 )
 
 func main() {
-	line := []byte("1 > 1")
+	// 假设aVal，bVal为接口请求返回参数
+	aVal := 1
+	bVal := 2
+
+	// 配置好的条件表达式
+	checkStr := "{aVal} > {bVal}"
+
+	// 配置好的表达式变量关系
+	checkStr = strings.ReplaceAll(checkStr, "{aVal}", strconv.Itoa(aVal))
+	checkStr = strings.ReplaceAll(checkStr, "{bVal}", strconv.Itoa(bVal))
+	line := []byte(checkStr)
 	lex := parse.Parse(line)
 	err := lex.GetError()
 	if err != nil {
-		fmt.Println("err is ",err)
+		fmt.Println("err is ", err)
 		return
 	}
 	res := lex.GetResult() // bool
-	fmt.Println("result is ",res)
+	fmt.Println("result is ", res)
 }
 ```
 
