@@ -1,9 +1,9 @@
 package main
 
 import (
-	"ConditionalScriptParse/parse"
 	"bufio"
 	"fmt"
+	"github.com/xwatsonmai/ConditionalScriptParse/parse"
 	"io"
 	"log"
 	"os"

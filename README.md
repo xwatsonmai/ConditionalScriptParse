@@ -16,14 +16,39 @@
 ### 4. 对应的前端脚本编写组件 （咕咕咕）
 
 ## 五、使用
-### 1.拉代码
-### 2. go run *.go
+### 1.拉包
+```shell
+ go get -u github.com/xwatsonmai/ConditionalScriptParse/parse@v1.0.1 
+```
+### 2.在代码中使用
+```golang
+package main
+
+import (
+	"fmt"
+	"github.com/xwatsonmai/ConditionalScriptParse/parse"
+)
+
+func main() {
+	line := []byte("1 > 1")
+	lex := parse.Parse(line)
+	err := lex.GetError()
+	if err != nil {
+		fmt.Println("err is ",err)
+		return
+	}
+	res := lex.GetResult() // bool
+	fmt.Println("result is ",res)
+}
+```
 
 ## 六、基础符号
 ### 1.四则运算：+，-，*，/
 ### 2.范围判断「(」... 「)」
 ### 3.并:and ，或:or
 ### 4.等于: =
+### 5.字符串需要是'"'进行包裹
+
 
 ## 用例：
 ```shell
@@ -37,5 +62,7 @@ false
 true
 > (1=1) and (2>2)
 false
-
+> "你好" = "你好"
+true
 ```
+* 更多的测试用例可在parse/lexer_test.go中查看
