@@ -1,0 +1,508 @@
+
+state 0
+	$accept: .start $end 
+
+	'('  shift 7
+	'-'  shift 10
+	PARAM  shift 15
+	STRPARAM  shift 13
+	.  error
+
+	expr  goto 6
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+	exprstr  goto 8
+	exprstr1  goto 11
+	res  goto 2
+	item  goto 3
+	numItem  goto 4
+	strItem  goto 5
+	start  goto 1
+
+state 1
+	$accept:  start.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	start:  res.    (1)
+
+	.  reduce 1 (src line 27)
+
+
+state 3
+	res:  item.    (2)
+	res:  item.AND item 
+	res:  item.NOT item 
+	res:  item.'=' item 
+	res:  item.OR item 
+
+	'='  shift 18
+	NOT  shift 17
+	AND  shift 16
+	OR  shift 19
+	.  reduce 2 (src line 32)
+
+
+state 4
+	item:  numItem.    (7)
+
+	.  reduce 7 (src line 53)
+
+
+state 5
+	item:  strItem.    (8)
+
+	.  reduce 8 (src line 58)
+
+
+state 6
+	numItem:  expr.'>' expr 
+	numItem:  expr.'<' expr 
+	numItem:  expr.'=' expr 
+	numItem:  expr.NOT expr 
+
+	'>'  shift 20
+	'<'  shift 21
+	'='  shift 22
+	NOT  shift 23
+	.  error
+
+
+state 7
+	numItem:  '('.item ')' 
+	expr3:  '('.expr ')' 
+
+	'('  shift 7
+	'-'  shift 10
+	PARAM  shift 15
+	STRPARAM  shift 13
+	.  error
+
+	expr  goto 25
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+	exprstr  goto 8
+	exprstr1  goto 11
+	item  goto 24
+	numItem  goto 4
+	strItem  goto 5
+
+state 8
+	strItem:  exprstr.'=' exprstr 
+	strItem:  exprstr.NOT exprstr 
+
+	'='  shift 26
+	NOT  shift 27
+	.  error
+
+
+state 9
+	expr:  expr1.    (18)
+	expr1:  expr1.'+' expr2 
+	expr1:  expr1.'-' expr2 
+
+	'+'  shift 28
+	'-'  shift 29
+	.  reduce 18 (src line 115)
+
+
+state 10
+	expr:  '-'.expr 
+
+	'('  shift 31
+	'-'  shift 10
+	PARAM  shift 15
+	.  error
+
+	expr  goto 30
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+
+state 11
+	exprstr:  exprstr1.    (11)
+
+	.  reduce 11 (src line 71)
+
+
+state 12
+	expr1:  expr2.    (20)
+	expr2:  expr2.'*' expr3 
+	expr2:  expr2.'/' expr3 
+
+	'*'  shift 32
+	'/'  shift 33
+	.  reduce 20 (src line 121)
+
+
+state 13
+	exprstr1:  STRPARAM.    (12)
+
+	.  reduce 12 (src line 76)
+
+
+state 14
+	expr2:  expr3.    (23)
+
+	.  reduce 23 (src line 131)
+
+
+state 15
+	expr3:  PARAM.    (26)
+
+	.  reduce 26 (src line 142)
+
+
+state 16
+	res:  item AND.item 
+
+	'('  shift 7
+	'-'  shift 10
+	PARAM  shift 15
+	STRPARAM  shift 13
+	.  error
+
+	expr  goto 6
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+	exprstr  goto 8
+	exprstr1  goto 11
+	item  goto 34
+	numItem  goto 4
+	strItem  goto 5
+
+state 17
+	res:  item NOT.item 
+
+	'('  shift 7
+	'-'  shift 10
+	PARAM  shift 15
+	STRPARAM  shift 13
+	.  error
+
+	expr  goto 6
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+	exprstr  goto 8
+	exprstr1  goto 11
+	item  goto 35
+	numItem  goto 4
+	strItem  goto 5
+
+state 18
+	res:  item '='.item 
+
+	'('  shift 7
+	'-'  shift 10
+	PARAM  shift 15
+	STRPARAM  shift 13
+	.  error
+
+	expr  goto 6
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+	exprstr  goto 8
+	exprstr1  goto 11
+	item  goto 36
+	numItem  goto 4
+	strItem  goto 5
+
+state 19
+	res:  item OR.item 
+
+	'('  shift 7
+	'-'  shift 10
+	PARAM  shift 15
+	STRPARAM  shift 13
+	.  error
+
+	expr  goto 6
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+	exprstr  goto 8
+	exprstr1  goto 11
+	item  goto 37
+	numItem  goto 4
+	strItem  goto 5
+
+state 20
+	numItem:  expr '>'.expr 
+
+	'('  shift 31
+	'-'  shift 10
+	PARAM  shift 15
+	.  error
+
+	expr  goto 38
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+
+state 21
+	numItem:  expr '<'.expr 
+
+	'('  shift 31
+	'-'  shift 10
+	PARAM  shift 15
+	.  error
+
+	expr  goto 39
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+
+state 22
+	numItem:  expr '='.expr 
+
+	'('  shift 31
+	'-'  shift 10
+	PARAM  shift 15
+	.  error
+
+	expr  goto 40
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+
+state 23
+	numItem:  expr NOT.expr 
+
+	'('  shift 31
+	'-'  shift 10
+	PARAM  shift 15
+	.  error
+
+	expr  goto 41
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+
+state 24
+	numItem:  '(' item.')' 
+
+	')'  shift 42
+	.  error
+
+
+state 25
+	numItem:  expr.'>' expr 
+	numItem:  expr.'<' expr 
+	numItem:  expr.'=' expr 
+	numItem:  expr.NOT expr 
+	expr3:  '(' expr.')' 
+
+	'>'  shift 20
+	'<'  shift 21
+	'='  shift 22
+	')'  shift 43
+	NOT  shift 23
+	.  error
+
+
+state 26
+	strItem:  exprstr '='.exprstr 
+
+	STRPARAM  shift 13
+	.  error
+
+	exprstr  goto 44
+	exprstr1  goto 11
+
+state 27
+	strItem:  exprstr NOT.exprstr 
+
+	STRPARAM  shift 13
+	.  error
+
+	exprstr  goto 45
+	exprstr1  goto 11
+
+state 28
+	expr1:  expr1 '+'.expr2 
+
+	'('  shift 31
+	PARAM  shift 15
+	.  error
+
+	expr2  goto 46
+	expr3  goto 14
+
+state 29
+	expr1:  expr1 '-'.expr2 
+
+	'('  shift 31
+	PARAM  shift 15
+	.  error
+
+	expr2  goto 47
+	expr3  goto 14
+
+state 30
+	expr:  '-' expr.    (19)
+
+	.  reduce 19 (src line 117)
+
+
+state 31
+	expr3:  '('.expr ')' 
+
+	'('  shift 31
+	'-'  shift 10
+	PARAM  shift 15
+	.  error
+
+	expr  goto 48
+	expr1  goto 9
+	expr2  goto 12
+	expr3  goto 14
+
+state 32
+	expr2:  expr2 '*'.expr3 
+
+	'('  shift 31
+	PARAM  shift 15
+	.  error
+
+	expr3  goto 49
+
+state 33
+	expr2:  expr2 '/'.expr3 
+
+	'('  shift 31
+	PARAM  shift 15
+	.  error
+
+	expr3  goto 50
+
+state 34
+	res:  item AND item.    (3)
+
+	.  reduce 3 (src line 37)
+
+
+state 35
+	res:  item NOT item.    (4)
+
+	.  reduce 4 (src line 41)
+
+
+state 36
+	res:  item '=' item.    (5)
+
+	.  reduce 5 (src line 45)
+
+
+state 37
+	res:  item OR item.    (6)
+
+	.  reduce 6 (src line 49)
+
+
+state 38
+	numItem:  expr '>' expr.    (13)
+
+	.  reduce 13 (src line 78)
+
+
+state 39
+	numItem:  expr '<' expr.    (14)
+
+	.  reduce 14 (src line 87)
+
+
+state 40
+	numItem:  expr '=' expr.    (15)
+
+	.  reduce 15 (src line 95)
+
+
+state 41
+	numItem:  expr NOT expr.    (16)
+
+	.  reduce 16 (src line 103)
+
+
+state 42
+	numItem:  '(' item ')'.    (17)
+
+	.  reduce 17 (src line 111)
+
+
+state 43
+	expr3:  '(' expr ')'.    (27)
+
+	.  reduce 27 (src line 144)
+
+
+state 44
+	strItem:  exprstr '=' exprstr.    (9)
+
+	.  reduce 9 (src line 62)
+
+
+state 45
+	strItem:  exprstr NOT exprstr.    (10)
+
+	.  reduce 10 (src line 67)
+
+
+state 46
+	expr1:  expr1 '+' expr2.    (21)
+	expr2:  expr2.'*' expr3 
+	expr2:  expr2.'/' expr3 
+
+	'*'  shift 32
+	'/'  shift 33
+	.  reduce 21 (src line 123)
+
+
+state 47
+	expr1:  expr1 '-' expr2.    (22)
+	expr2:  expr2.'*' expr3 
+	expr2:  expr2.'/' expr3 
+
+	'*'  shift 32
+	'/'  shift 33
+	.  reduce 22 (src line 127)
+
+
+state 48
+	expr3:  '(' expr.')' 
+
+	')'  shift 43
+	.  error
+
+
+state 49
+	expr2:  expr2 '*' expr3.    (24)
+
+	.  reduce 24 (src line 133)
+
+
+state 50
+	expr2:  expr2 '/' expr3.    (25)
+
+	.  reduce 25 (src line 137)
+
+
+18 terminals, 12 nonterminals
+28 grammar rules, 51/16000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+61 working sets used
+memory: parser 92/240000
+31 extra closures
+77 shift entries, 1 exceptions
+29 goto entries
+61 entries saved by goto default
+Optimizer space used: output 60/240000
+60 table entries, 0 zero
+maximum spread: 18, maximum offset: 33
