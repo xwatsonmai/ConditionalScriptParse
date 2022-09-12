@@ -34,7 +34,7 @@ func (x *exprLex) Lex(yylval *msSymType) int {
 			//buff.WriteRune(c)
 			//fmt.Println("debug", string(c))
 			return x.num(c, yylval)
-		case 'a', 'o':
+		case 'a', 'o', 'i':
 			return x.symbol(c, yylval)
 		case '"':
 			//fmt.Println("debug string", string(c))
@@ -43,8 +43,9 @@ func (x *exprLex) Lex(yylval *msSymType) int {
 			// 组合符号
 			if x.peek() == '=' {
 			} else {
-				x.err = errors.New(fmt.Sprintf("错误的!符号"))
-				return 0
+				//x.err = errors.New(fmt.Sprintf("错误的!符号"))
+				//return 0
+				return int(c)
 			}
 		case '<', '>':
 			if x.peek() == '=' {
@@ -158,6 +159,8 @@ L:
 		return AND
 	} else if b.String() == "or" {
 		return OR
+	} else if b.String() == "in" {
+		return IN
 	} else {
 		log.Printf("bad symbol %q", b.String())
 		return eof

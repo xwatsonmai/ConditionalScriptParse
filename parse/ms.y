@@ -3,6 +3,7 @@ package parse
 
 import (
         "math/big"
+        "strings"
 )
 
 func setResult(l msLexer, v bool) {
@@ -14,15 +15,18 @@ param  *big.Rat
 strParam string
 check bool
 symbol string
+array []*big.Rat
 }
 
 %type <param> expr expr1 expr2 expr3
 %type <strParam> exprstr exprstr1
 %type <check> res item numItem strItem
+//%type <array> arrayExpr
 %token '>' '<' '=' '!' '(' ')' '+' '-' '*' '/'
 %token <param> PARAM
 %token <strParam> STRPARAM
-%token <symbol> NOT AND OR GE LE
+%token <symbol> NOT AND OR GE LE IN
+//%token <array> ARRAY
 %%
 start:
 	res
@@ -33,6 +37,10 @@ res:
 	item
 	{
 	$$ = $1
+	}
+|	'!' item
+	{
+	$$ = !$2
 	}
 |	item AND item
 	{
@@ -68,6 +76,14 @@ strItem:
  	{
  	$$ = $1 != $3
  	}
+|	exprstr IN '(' exprstr ')'
+	{
+	if strings.Index($4,$1) != -1 {
+	$$ = true
+	}else {
+	$$ = false
+	}
+	}
 exprstr:
 	exprstr1
 	{
@@ -134,6 +150,19 @@ numItem:
        	  $$ = false
        	}
         }
+//|	expr IN '(' ARRAY ')'
+//	{
+//	isCheck := false
+//	for _, item := range $4 {
+//		if item.Cmp($1) == 0 {
+//			$$ = true
+//			isCheck = true
+//		}
+//	}
+//	if !isCheck {
+//	$$ = false
+//	}
+//	}
 |	'(' item ')'
 	{
 	$$ = $2
