@@ -16,7 +16,7 @@ func TestParser(t *testing.T) {
 			output:  true,
 		},
 		{
-			input:   "1=1",
+			input:   "1=1 or 2=2 or 3=3",
 			wantErr: "",
 			output:  true,
 		},

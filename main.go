@@ -28,7 +28,7 @@ func main() {
 	//	//strings.Index()
 	//}
 
-	lex := parse.Parse([]byte(`!(1 = 1)`))
+	lex := parse.Parse([]byte(`((""="{}" or ""="" or -1=0 or -1=2 or -1=3) and (1=1 or 1=3 or 1=5))`))
 	fmt.Println("res", lex.GetResult())
 	fmt.Println("err", lex.GetError())
 

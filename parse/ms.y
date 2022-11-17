@@ -20,7 +20,7 @@ array []*big.Rat
 
 %type <param> expr expr1 expr2 expr3
 %type <strParam> exprstr exprstr1
-%type <check> res item numItem strItem
+%type <check> res item numItem strItem boolItem
 //%type <array> arrayExpr
 %token '>' '<' '=' '!' '(' ')' '+' '-' '*' '/'
 %token <param> PARAM
@@ -29,10 +29,36 @@ array []*big.Rat
 //%token <array> ARRAY
 %%
 start:
-	res
+	boolItem
 	{
 	setResult(mslex,$1)
 	}
+boolItem:
+	res
+	{
+	$$ = $1
+	}
+|	boolItem AND boolItem
+	{
+	$$ = $1 && $3
+	}
+|	boolItem NOT boolItem
+        {
+        $$ = $1 != $3
+        }
+|	boolItem '=' boolItem
+	{
+	$$ = $1 == $3
+	}
+|	boolItem OR boolItem
+	{
+	$$ = $1 || $3
+	}
+|      '(' boolItem ')'
+	{
+	$$ = $2
+	}
+
 res:
 	item
 	{

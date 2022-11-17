@@ -65,7 +65,7 @@ const msEofCode = 1
 const msErrCode = 2
 const msInitialStackSize = 16
 
-//line ms.y:203
+//line ms.y:229
 
 //line yacctab:1
 var msExca = [...]int8{
@@ -76,67 +76,74 @@ var msExca = [...]int8{
 
 const msPrivate = 57344
 
-const msLast = 87
+const msLast = 122
 
 var msAct = [...]int8{
-	9, 7, 15, 14, 31, 12, 22, 23, 24, 28,
-	30, 13, 57, 36, 32, 39, 40, 38, 27, 33,
-	31, 25, 26, 51, 45, 46, 47, 48, 49, 50,
-	32, 66, 54, 56, 37, 33, 22, 23, 24, 60,
-	16, 53, 62, 63, 61, 3, 58, 59, 27, 19,
-	21, 25, 26, 51, 29, 55, 64, 53, 65, 18,
-	17, 20, 14, 41, 42, 43, 44, 4, 8, 1,
-	8, 11, 52, 11, 16, 14, 16, 14, 37, 34,
-	35, 11, 6, 5, 16, 2, 10,
+	10, 16, 15, 45, 13, 23, 5, 79, 38, 9,
+	14, 24, 68, 30, 25, 32, 33, 34, 39, 15,
+	55, 70, 43, 40, 46, 47, 53, 37, 41, 42,
+	35, 36, 23, 56, 57, 58, 59, 55, 60, 67,
+	69, 25, 61, 62, 63, 64, 65, 66, 75, 76,
+	74, 20, 71, 72, 73, 2, 54, 1, 44, 8,
+	22, 19, 18, 21, 17, 7, 32, 33, 34, 77,
+	38, 78, 3, 53, 48, 49, 50, 51, 37, 11,
+	39, 35, 36, 28, 0, 40, 54, 20, 0, 0,
+	52, 28, 0, 27, 26, 29, 0, 19, 18, 21,
+	0, 27, 26, 29, 6, 4, 0, 31, 12, 0,
+	12, 17, 15, 17, 15, 44, 0, 0, 12, 0,
+	0, 17,
 }
 
 var msPact = [...]int16{
-	60, -1000, -1000, 43, 62, -1000, -1000, 2, 62, -2,
-	69, 70, 7, 3, -1000, -1000, -1000, 62, 62, 62,
-	62, -1000, 70, 70, 70, 70, 70, 70, 14, 63,
-	32, 47, 47, 4, 26, 26, -1000, 70, -12, 26,
-	26, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
-	-1000, -1000, -1000, -1000, -1000, 47, -1000, 47, 3, 3,
-	48, -1000, -1000, -1000, 44, 22, -1000,
+	97, -1000, 45, -1000, 97, 85, 99, -1000, -1000, 62,
+	2, 18, 107, -7, 12, -1000, -1000, -1000, 97, 97,
+	97, 97, 81, 64, 77, 11, 99, 99, 99, 99,
+	-1000, 99, 107, 107, 107, 107, 107, 107, 4, 4,
+	13, 50, 50, -1000, 107, -13, 50, 50, 45, 45,
+	45, 45, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
+	47, -1000, -1000, -1000, -1000, -1000, -1000, -1000, 4, -1000,
+	4, 12, 12, 28, -1000, -1000, -1000, 17, -2, -1000,
 }
 
 var msPgo = [...]int8{
-	0, 1, 86, 11, 2, 0, 5, 85, 45, 83,
-	82, 69,
+	0, 9, 79, 10, 1, 0, 4, 72, 6, 65,
+	59, 55, 57,
 }
 
 var msR1 = [...]int8{
-	0, 11, 7, 7, 7, 7, 7, 7, 8, 8,
-	10, 10, 10, 5, 5, 5, 6, 9, 9, 9,
-	9, 9, 9, 9, 1, 1, 2, 2, 2, 3,
-	3, 3, 4, 4,
+	0, 12, 11, 11, 11, 11, 11, 11, 7, 7,
+	7, 7, 7, 7, 8, 8, 10, 10, 10, 5,
+	5, 5, 6, 9, 9, 9, 9, 9, 9, 9,
+	1, 1, 2, 2, 2, 3, 3, 3, 4, 4,
 }
 
 var msR2 = [...]int8{
-	0, 1, 1, 2, 3, 3, 3, 3, 1, 1,
-	3, 3, 5, 1, 3, 3, 1, 3, 3, 3,
-	3, 3, 3, 3, 1, 2, 1, 3, 3, 1,
-	3, 3, 1, 3,
+	0, 1, 1, 3, 3, 3, 3, 3, 1, 2,
+	3, 3, 3, 3, 1, 1, 3, 3, 5, 1,
+	3, 3, 1, 3, 3, 3, 3, 3, 3, 3,
+	1, 2, 1, 3, 3, 1, 3, 3, 1, 3,
 }
 
 var msChk = [...]int16{
-	-1000, -11, -7, -8, 7, -9, -10, -1, 8, -5,
-	-2, 11, -6, -3, 15, -4, 14, 17, 16, 6,
-	18, -8, 4, 5, 6, 19, 20, 16, -5, -8,
-	-1, 6, 16, 21, 10, 11, -1, 8, 10, 12,
-	13, -8, -8, -8, -8, -1, -1, -1, -1, -1,
-	-1, 9, 9, 9, -5, 8, -5, 8, -3, -3,
-	-1, -6, -4, -4, -5, -5, 9,
+	-1000, -12, -11, -7, 8, -8, 7, -9, -10, -1,
+	-5, -2, 11, -6, -3, 15, -4, 14, 17, 16,
+	6, 18, -11, -5, -8, -1, 17, 16, 6, 18,
+	-8, 8, 4, 5, 6, 19, 20, 16, 6, 16,
+	21, 10, 11, -1, 8, 10, 12, 13, -11, -11,
+	-11, -11, 9, 9, 9, 9, -8, -8, -8, -8,
+	-8, -1, -1, -1, -1, -1, -1, -5, 8, -5,
+	8, -3, -3, -1, -6, -4, -4, -5, -5, 9,
 }
 
 var msDef = [...]int8{
-	0, -2, 1, 2, 0, 8, 9, 0, 0, 0,
-	24, 0, 13, 26, 16, 29, 32, 0, 0, 0,
-	0, 3, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 25, 0, 0, 0,
-	0, 4, 5, 6, 7, 17, 18, 19, 20, 21,
-	22, 15, 23, 33, 10, 0, 11, 0, 27, 28,
-	0, 14, 30, 31, 0, 0, 12,
+	0, -2, 1, 2, 0, 8, 0, 14, 15, 0,
+	0, 30, 0, 19, 32, 22, 35, 38, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	9, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 31, 0, 0, 0, 0, 3, 4,
+	5, 6, 7, 21, 29, 39, 10, 11, 12, 13,
+	0, 23, 24, 25, 26, 27, 28, 16, 0, 17,
+	0, 33, 34, 0, 20, 36, 37, 0, 0, 18,
 }
 
 var msTok1 = [...]int8{
@@ -507,62 +514,98 @@ msdefault:
 			msVAL.check = msDollar[1].check
 		}
 	case 3:
-		msDollar = msS[mspt-2 : mspt+1]
+		msDollar = msS[mspt-3 : mspt+1]
 //line ms.y:42
 		{
-			msVAL.check = !msDollar[2].check
+			msVAL.check = msDollar[1].check && msDollar[3].check
 		}
 	case 4:
 		msDollar = msS[mspt-3 : mspt+1]
 //line ms.y:46
 		{
-			msVAL.check = msDollar[1].check && msDollar[3].check
+			msVAL.check = msDollar[1].check != msDollar[3].check
 		}
 	case 5:
 		msDollar = msS[mspt-3 : mspt+1]
 //line ms.y:50
 		{
-			msVAL.check = msDollar[1].check != msDollar[3].check
+			msVAL.check = msDollar[1].check == msDollar[3].check
 		}
 	case 6:
 		msDollar = msS[mspt-3 : mspt+1]
 //line ms.y:54
 		{
-			msVAL.check = msDollar[1].check == msDollar[3].check
+			msVAL.check = msDollar[1].check || msDollar[3].check
 		}
 	case 7:
 		msDollar = msS[mspt-3 : mspt+1]
 //line ms.y:58
 		{
-			msVAL.check = msDollar[1].check || msDollar[3].check
+			msVAL.check = msDollar[2].check
 		}
 	case 8:
 		msDollar = msS[mspt-1 : mspt+1]
-//line ms.y:63
+//line ms.y:64
 		{
 			msVAL.check = msDollar[1].check
 		}
 	case 9:
-		msDollar = msS[mspt-1 : mspt+1]
-//line ms.y:67
+		msDollar = msS[mspt-2 : mspt+1]
+//line ms.y:68
 		{
-			msVAL.check = msDollar[1].check
+			msVAL.check = !msDollar[2].check
 		}
 	case 10:
 		msDollar = msS[mspt-3 : mspt+1]
 //line ms.y:72
 		{
-			msVAL.check = msDollar[1].strParam == msDollar[3].strParam
+			msVAL.check = msDollar[1].check && msDollar[3].check
 		}
 	case 11:
 		msDollar = msS[mspt-3 : mspt+1]
 //line ms.y:76
 		{
-			msVAL.check = msDollar[1].strParam != msDollar[3].strParam
+			msVAL.check = msDollar[1].check != msDollar[3].check
 		}
 	case 12:
-		msDollar = msS[mspt-5 : mspt+1]
+		msDollar = msS[mspt-3 : mspt+1]
 //line ms.y:80
+		{
+			msVAL.check = msDollar[1].check == msDollar[3].check
+		}
+	case 13:
+		msDollar = msS[mspt-3 : mspt+1]
+//line ms.y:84
+		{
+			msVAL.check = msDollar[1].check || msDollar[3].check
+		}
+	case 14:
+		msDollar = msS[mspt-1 : mspt+1]
+//line ms.y:89
+		{
+			msVAL.check = msDollar[1].check
+		}
+	case 15:
+		msDollar = msS[mspt-1 : mspt+1]
+//line ms.y:93
+		{
+			msVAL.check = msDollar[1].check
+		}
+	case 16:
+		msDollar = msS[mspt-3 : mspt+1]
+//line ms.y:98
+		{
+			msVAL.check = msDollar[1].strParam == msDollar[3].strParam
+		}
+	case 17:
+		msDollar = msS[mspt-3 : mspt+1]
+//line ms.y:102
+		{
+			msVAL.check = msDollar[1].strParam != msDollar[3].strParam
+		}
+	case 18:
+		msDollar = msS[mspt-5 : mspt+1]
+//line ms.y:106
 		{
 			if strings.Index(msDollar[4].strParam, msDollar[1].strParam) != -1 {
 				msVAL.check = true
@@ -570,27 +613,27 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 13:
+	case 19:
 		msDollar = msS[mspt-1 : mspt+1]
-//line ms.y:89
+//line ms.y:115
 		{
 			msVAL.strParam = msDollar[1].strParam
 		}
-	case 14:
+	case 20:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:93
+//line ms.y:119
 		{
 			msVAL.strParam = msDollar[1].strParam + msDollar[3].strParam
 		}
-	case 15:
+	case 21:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:97
+//line ms.y:123
 		{
 			msVAL.strParam = msDollar[2].strParam
 		}
-	case 17:
+	case 23:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:104
+//line ms.y:130
 		{
 			if msDollar[1].param.Cmp(msDollar[3].param) == 1 {
 				msVAL.check = true
@@ -598,9 +641,9 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 18:
+	case 24:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:112
+//line ms.y:138
 		{
 			if msDollar[1].param.Cmp(msDollar[3].param) == -1 {
 				msVAL.check = true
@@ -608,9 +651,9 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 19:
+	case 25:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:120
+//line ms.y:146
 		{
 			if msDollar[1].param.Cmp(msDollar[3].param) == 0 {
 				msVAL.check = true
@@ -618,9 +661,9 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 20:
+	case 26:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:128
+//line ms.y:154
 		{
 			check := msDollar[1].param.Cmp(msDollar[3].param)
 			if check == 1 || check == 0 {
@@ -629,9 +672,9 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 21:
+	case 27:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:137
+//line ms.y:163
 		{
 			check := msDollar[1].param.Cmp(msDollar[3].param)
 			if check == -1 || check == 0 {
@@ -640,9 +683,9 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 22:
+	case 28:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:146
+//line ms.y:172
 		{
 			if msDollar[1].param.Cmp(msDollar[3].param) != 0 {
 				msVAL.check = true
@@ -650,45 +693,45 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 23:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:167
-		{
-			msVAL.check = msDollar[2].check
-		}
-	case 25:
-		msDollar = msS[mspt-2 : mspt+1]
-//line ms.y:173
-		{
-			msVAL.param = msDollar[2].param.Neg(msDollar[2].param)
-		}
-	case 27:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:179
-		{
-			msVAL.param = msDollar[1].param.Add(msDollar[1].param, msDollar[3].param)
-		}
-	case 28:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:183
-		{
-			msVAL.param = msDollar[1].param.Sub(msDollar[1].param, msDollar[3].param)
-		}
-	case 30:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:189
-		{
-			msVAL.param = msDollar[1].param.Mul(msDollar[1].param, msDollar[3].param)
-		}
-	case 31:
+	case 29:
 		msDollar = msS[mspt-3 : mspt+1]
 //line ms.y:193
 		{
-			msVAL.param = msDollar[1].param.Quo(msDollar[1].param, msDollar[3].param)
+			msVAL.check = msDollar[2].check
+		}
+	case 31:
+		msDollar = msS[mspt-2 : mspt+1]
+//line ms.y:199
+		{
+			msVAL.param = msDollar[2].param.Neg(msDollar[2].param)
 		}
 	case 33:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:200
+//line ms.y:205
+		{
+			msVAL.param = msDollar[1].param.Add(msDollar[1].param, msDollar[3].param)
+		}
+	case 34:
+		msDollar = msS[mspt-3 : mspt+1]
+//line ms.y:209
+		{
+			msVAL.param = msDollar[1].param.Sub(msDollar[1].param, msDollar[3].param)
+		}
+	case 36:
+		msDollar = msS[mspt-3 : mspt+1]
+//line ms.y:215
+		{
+			msVAL.param = msDollar[1].param.Mul(msDollar[1].param, msDollar[3].param)
+		}
+	case 37:
+		msDollar = msS[mspt-3 : mspt+1]
+//line ms.y:219
+		{
+			msVAL.param = msDollar[1].param.Quo(msDollar[1].param, msDollar[3].param)
+		}
+	case 39:
+		msDollar = msS[mspt-3 : mspt+1]
+//line ms.y:226
 		{
 			msVAL.param = msDollar[2].param
 		}
