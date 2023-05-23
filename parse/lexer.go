@@ -42,6 +42,8 @@ func (x *exprLex) Lex(yylval *msSymType) int {
 		case '!':
 			// 组合符号
 			if x.peek() == '=' {
+				x.pos++
+				return NOT
 			} else {
 				//x.err = errors.New(fmt.Sprintf("错误的!符号"))
 				//return 0
