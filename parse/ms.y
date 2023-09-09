@@ -42,23 +42,30 @@ boolItem:
 	{
 	$$ = $1 && $3
 	}
-|	boolItem NOT boolItem
-        {
-        $$ = $1 != $3
-        }
-|	boolItem '=' boolItem
-	{
-	$$ = $1 == $3
-	}
 |	boolItem OR boolItem
 	{
 	$$ = $1 || $3
 	}
-|      '(' boolItem ')'
+|	boolItem '=' boolItem
+	{
+	$$ = $1 == $3
+	}
+|	'(' boolItem ')'
 	{
 	$$ = $2
 	}
-
+|	item '=' item
+	{
+	$$ = $1 == $3
+	}
+|	item NOT item
+	{
+	$$ = $1 != $3
+	}
+|	'(' item ')'
+	{
+	$$ = $2
+	}
 res:
 	item
 	{
@@ -72,17 +79,21 @@ res:
 	{
 	$$ = $1 && $3
 	}
-|	item NOT item
-        {
-        $$ = $1 != $3
-        }
-|	item '=' item
-	{
-	$$ = $1 == $3
-	}
 |	item OR item
 	{
 	$$ = $1 || $3
+	}
+|	res AND res
+	{
+	$$ = $1 && $3
+	}
+|	res OR res
+	{
+	$$ = $1 || $3
+	}
+|	'(' res ')'
+	{
+	$$ = $2
 	}
 item:
 	numItem
@@ -98,10 +109,6 @@ strItem:
 	{
 	$$ = $1 == $3
 	}
-|	exprstr NOT exprstr
- 	{
- 	$$ = $1 != $3
- 	}
 |	exprstr IN '(' exprstr ')'
 	{
 	if strings.Index($4,$1) != -1 {
@@ -168,27 +175,6 @@ numItem:
 	$$ = false
 	}
 	}
-|	expr NOT expr
-        {
-       	if $1.Cmp($3) != 0 {
-       	  $$ = true
-       	}else{
-       	  $$ = false
-       	}
-        }
-//|	expr IN '(' ARRAY ')'
-//	{
-//	isCheck := false
-//	for _, item := range $4 {
-//		if item.Cmp($1) == 0 {
-//			$$ = true
-//			isCheck = true
-//		}
-//	}
-//	if !isCheck {
-//	$$ = false
-//	}
-//	}
 |	'(' item ')'
 	{
 	$$ = $2

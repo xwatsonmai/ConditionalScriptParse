@@ -90,6 +90,11 @@ func TestParser(t *testing.T) {
 			wantErr: "",
 			output:  true,
 		},
+		{
+			input:   "\"禁言\" in (\"禁言\")",
+			wantErr: "",
+			output:  true,
+		},
 	}
 	//parseHandler := &exprLex{}
 	for _, tc := range testcases {
