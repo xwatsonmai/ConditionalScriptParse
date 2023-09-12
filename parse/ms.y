@@ -109,6 +109,10 @@ strItem:
 	{
 	$$ = $1 == $3
 	}
+| 	exprstr NOT exprstr
+           {
+                $$ = $1 != $3
+            }
 |	exprstr IN '(' exprstr ')'
 	{
 	if strings.Index($4,$1) != -1 {

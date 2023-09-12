@@ -145,70 +145,72 @@ state 9
 
 state 10
 	strItem:  exprstr.'=' exprstr 
+	strItem:  exprstr.NOT exprstr 
 	strItem:  exprstr.IN '(' exprstr ')' 
 
 	'='  shift 39
-	IN  shift 40
+	NOT  shift 40
+	IN  shift 41
 	.  error
 
 
 state 11
-	expr:  expr1.    (31)
+	expr:  expr1.    (32)
 	expr1:  expr1.'+' expr2 
 	expr1:  expr1.'-' expr2 
 
-	'+'  shift 41
-	'-'  shift 42
-	.  reduce 31 (src line 182)
+	'+'  shift 42
+	'-'  shift 43
+	.  reduce 32 (src line 186)
 
 
 state 12
 	expr:  '-'.expr 
 
-	'('  shift 44
+	'('  shift 45
 	'-'  shift 12
 	PARAM  shift 17
 	.  error
 
-	expr  goto 43
+	expr  goto 44
 	expr1  goto 11
 	expr2  goto 14
 	expr3  goto 16
 
 state 13
-	exprstr:  exprstr1.    (21)
+	exprstr:  exprstr1.    (22)
 	exprstr:  exprstr1.'+' exprstr1 
 
-	'+'  shift 45
-	.  reduce 21 (src line 120)
+	'+'  shift 46
+	.  reduce 22 (src line 124)
 
 
 state 14
-	expr1:  expr2.    (33)
+	expr1:  expr2.    (34)
 	expr2:  expr2.'*' expr3 
 	expr2:  expr2.'/' expr3 
 
-	'*'  shift 46
-	'/'  shift 47
-	.  reduce 33 (src line 188)
+	'*'  shift 47
+	'/'  shift 48
+	.  reduce 34 (src line 192)
 
 
 state 15
-	exprstr1:  STRPARAM.    (24)
+	exprstr1:  STRPARAM.    (25)
 
-	.  reduce 24 (src line 133)
+	.  reduce 25 (src line 137)
 
 
 state 16
-	expr2:  expr3.    (36)
+	expr2:  expr3.    (37)
 
-	.  reduce 36 (src line 198)
+	.  reduce 37 (src line 202)
 
 
 state 17
-	expr3:  PARAM.    (39)
+	expr3:  PARAM.    (40)
 
-	.  reduce 39 (src line 209)
+	.  reduce 40 (src line 213)
 
 
 state 18
@@ -231,7 +233,7 @@ state 18
 	item  goto 5
 	numItem  goto 7
 	strItem  goto 8
-	boolItem  goto 48
+	boolItem  goto 49
 
 state 19
 	boolItem:  boolItem OR.boolItem 
@@ -253,7 +255,7 @@ state 19
 	item  goto 5
 	numItem  goto 7
 	strItem  goto 8
-	boolItem  goto 49
+	boolItem  goto 50
 
 state 20
 	boolItem:  boolItem '='.boolItem 
@@ -275,13 +277,13 @@ state 20
 	item  goto 5
 	numItem  goto 7
 	strItem  goto 8
-	boolItem  goto 50
+	boolItem  goto 51
 
 state 21
 	res:  res AND.res 
 
 	'!'  shift 6
-	'('  shift 53
+	'('  shift 54
 	'-'  shift 12
 	PARAM  shift 17
 	STRPARAM  shift 15
@@ -293,8 +295,8 @@ state 21
 	expr3  goto 16
 	exprstr  goto 10
 	exprstr1  goto 13
-	res  goto 51
-	item  goto 52
+	res  goto 52
+	item  goto 53
 	numItem  goto 7
 	strItem  goto 8
 
@@ -302,7 +304,7 @@ state 22
 	res:  res OR.res 
 
 	'!'  shift 6
-	'('  shift 53
+	'('  shift 54
 	'-'  shift 12
 	PARAM  shift 17
 	STRPARAM  shift 15
@@ -314,8 +316,8 @@ state 22
 	expr3  goto 16
 	exprstr  goto 10
 	exprstr1  goto 13
-	res  goto 54
-	item  goto 52
+	res  goto 55
+	item  goto 53
 	numItem  goto 7
 	strItem  goto 8
 
@@ -326,14 +328,14 @@ state 23
 	boolItem:  '(' boolItem.')' 
 
 	'='  shift 20
-	')'  shift 55
+	')'  shift 56
 	AND  shift 18
 	OR  shift 19
 	.  error
 
 
 24: shift/reduce conflict (shift 28(0), red'n 10(0)) on '='
-24: shift/reduce conflict (shift 56(0), red'n 10(0)) on ')'
+24: shift/reduce conflict (shift 57(0), red'n 10(0)) on ')'
 24: shift/reduce conflict (shift 30(0), red'n 10(0)) on AND
 24: shift/reduce conflict (shift 31(0), red'n 10(0)) on OR
 state 24
@@ -346,14 +348,14 @@ state 24
 	numItem:  '(' item.')' 
 
 	'='  shift 28
-	')'  shift 56
+	')'  shift 57
 	NOT  shift 29
 	AND  shift 30
 	OR  shift 31
 	.  error
 
 
-25: shift/reduce conflict (shift 57(0), red'n 2(0)) on ')'
+25: shift/reduce conflict (shift 58(0), red'n 2(0)) on ')'
 25: shift/reduce conflict (shift 21(0), red'n 2(0)) on AND
 25: shift/reduce conflict (shift 22(0), red'n 2(0)) on OR
 state 25
@@ -362,7 +364,7 @@ state 25
 	res:  res.OR res 
 	res:  '(' res.')' 
 
-	')'  shift 57
+	')'  shift 58
 	AND  shift 21
 	OR  shift 22
 	.  reduce 2 (src line 36)
@@ -370,12 +372,14 @@ state 25
 
 state 26
 	strItem:  exprstr.'=' exprstr 
+	strItem:  exprstr.NOT exprstr 
 	strItem:  exprstr.IN '(' exprstr ')' 
 	exprstr:  '(' exprstr.')' 
 
 	'='  shift 39
-	')'  shift 58
-	IN  shift 40
+	')'  shift 59
+	NOT  shift 40
+	IN  shift 41
 	.  error
 
 
@@ -390,7 +394,7 @@ state 27
 	'>'  shift 34
 	'<'  shift 35
 	'='  shift 36
-	')'  shift 59
+	')'  shift 60
 	GE  shift 37
 	LE  shift 38
 	.  error
@@ -411,7 +415,7 @@ state 28
 	expr3  goto 16
 	exprstr  goto 10
 	exprstr1  goto 13
-	item  goto 60
+	item  goto 61
 	numItem  goto 7
 	strItem  goto 8
 
@@ -430,7 +434,7 @@ state 29
 	expr3  goto 16
 	exprstr  goto 10
 	exprstr1  goto 13
-	item  goto 61
+	item  goto 62
 	numItem  goto 7
 	strItem  goto 8
 
@@ -449,7 +453,7 @@ state 30
 	expr3  goto 16
 	exprstr  goto 10
 	exprstr1  goto 13
-	item  goto 62
+	item  goto 63
 	numItem  goto 7
 	strItem  goto 8
 
@@ -468,7 +472,7 @@ state 31
 	expr3  goto 16
 	exprstr  goto 10
 	exprstr1  goto 13
-	item  goto 63
+	item  goto 64
 	numItem  goto 7
 	strItem  goto 8
 
@@ -495,27 +499,14 @@ state 33
 	expr3  goto 16
 	exprstr  goto 26
 	exprstr1  goto 13
-	item  goto 64
+	item  goto 65
 	numItem  goto 7
 	strItem  goto 8
 
 state 34
 	numItem:  expr '>'.expr 
 
-	'('  shift 44
-	'-'  shift 12
-	PARAM  shift 17
-	.  error
-
-	expr  goto 65
-	expr1  goto 11
-	expr2  goto 14
-	expr3  goto 16
-
-state 35
-	numItem:  expr '<'.expr 
-
-	'('  shift 44
+	'('  shift 45
 	'-'  shift 12
 	PARAM  shift 17
 	.  error
@@ -525,10 +516,10 @@ state 35
 	expr2  goto 14
 	expr3  goto 16
 
-state 36
-	numItem:  expr '='.expr 
+state 35
+	numItem:  expr '<'.expr 
 
-	'('  shift 44
+	'('  shift 45
 	'-'  shift 12
 	PARAM  shift 17
 	.  error
@@ -538,10 +529,10 @@ state 36
 	expr2  goto 14
 	expr3  goto 16
 
-state 37
-	numItem:  expr GE.expr 
+state 36
+	numItem:  expr '='.expr 
 
-	'('  shift 44
+	'('  shift 45
 	'-'  shift 12
 	PARAM  shift 17
 	.  error
@@ -551,10 +542,10 @@ state 37
 	expr2  goto 14
 	expr3  goto 16
 
-state 38
-	numItem:  expr LE.expr 
+state 37
+	numItem:  expr GE.expr 
 
-	'('  shift 44
+	'('  shift 45
 	'-'  shift 12
 	PARAM  shift 17
 	.  error
@@ -564,92 +555,115 @@ state 38
 	expr2  goto 14
 	expr3  goto 16
 
-state 39
-	strItem:  exprstr '='.exprstr 
+state 38
+	numItem:  expr LE.expr 
 
-	'('  shift 71
-	STRPARAM  shift 15
-	.  error
-
-	exprstr  goto 70
-	exprstr1  goto 13
-
-state 40
-	strItem:  exprstr IN.'(' exprstr ')' 
-
-	'('  shift 72
-	.  error
-
-
-state 41
-	expr1:  expr1 '+'.expr2 
-
-	'('  shift 44
-	PARAM  shift 17
-	.  error
-
-	expr2  goto 73
-	expr3  goto 16
-
-state 42
-	expr1:  expr1 '-'.expr2 
-
-	'('  shift 44
-	PARAM  shift 17
-	.  error
-
-	expr2  goto 74
-	expr3  goto 16
-
-state 43
-	expr:  '-' expr.    (32)
-
-	.  reduce 32 (src line 184)
-
-
-state 44
-	expr3:  '('.expr ')' 
-
-	'('  shift 44
+	'('  shift 45
 	'-'  shift 12
 	PARAM  shift 17
 	.  error
 
-	expr  goto 75
+	expr  goto 70
 	expr1  goto 11
 	expr2  goto 14
 	expr3  goto 16
 
+state 39
+	strItem:  exprstr '='.exprstr 
+
+	'('  shift 72
+	STRPARAM  shift 15
+	.  error
+
+	exprstr  goto 71
+	exprstr1  goto 13
+
+state 40
+	strItem:  exprstr NOT.exprstr 
+
+	'('  shift 72
+	STRPARAM  shift 15
+	.  error
+
+	exprstr  goto 73
+	exprstr1  goto 13
+
+state 41
+	strItem:  exprstr IN.'(' exprstr ')' 
+
+	'('  shift 74
+	.  error
+
+
+state 42
+	expr1:  expr1 '+'.expr2 
+
+	'('  shift 45
+	PARAM  shift 17
+	.  error
+
+	expr2  goto 75
+	expr3  goto 16
+
+state 43
+	expr1:  expr1 '-'.expr2 
+
+	'('  shift 45
+	PARAM  shift 17
+	.  error
+
+	expr2  goto 76
+	expr3  goto 16
+
+state 44
+	expr:  '-' expr.    (33)
+
+	.  reduce 33 (src line 188)
+
+
 state 45
+	expr3:  '('.expr ')' 
+
+	'('  shift 45
+	'-'  shift 12
+	PARAM  shift 17
+	.  error
+
+	expr  goto 77
+	expr1  goto 11
+	expr2  goto 14
+	expr3  goto 16
+
+state 46
 	exprstr:  exprstr1 '+'.exprstr1 
 
 	STRPARAM  shift 15
 	.  error
 
-	exprstr1  goto 76
-
-state 46
-	expr2:  expr2 '*'.expr3 
-
-	'('  shift 44
-	PARAM  shift 17
-	.  error
-
-	expr3  goto 77
+	exprstr1  goto 78
 
 state 47
-	expr2:  expr2 '/'.expr3 
+	expr2:  expr2 '*'.expr3 
 
-	'('  shift 44
+	'('  shift 45
 	PARAM  shift 17
 	.  error
 
-	expr3  goto 78
+	expr3  goto 79
 
-48: shift/reduce conflict (shift 20(0), red'n 3(0)) on '='
-48: shift/reduce conflict (shift 18(0), red'n 3(0)) on AND
-48: shift/reduce conflict (shift 19(0), red'n 3(0)) on OR
 state 48
+	expr2:  expr2 '/'.expr3 
+
+	'('  shift 45
+	PARAM  shift 17
+	.  error
+
+	expr3  goto 80
+
+49: shift/reduce conflict (shift 20(0), red'n 3(0)) on '='
+49: shift/reduce conflict (shift 18(0), red'n 3(0)) on AND
+49: shift/reduce conflict (shift 19(0), red'n 3(0)) on OR
+state 49
 	boolItem:  boolItem.AND boolItem 
 	boolItem:  boolItem AND boolItem.    (3)
 	boolItem:  boolItem.OR boolItem 
@@ -661,10 +675,10 @@ state 48
 	.  reduce 3 (src line 41)
 
 
-49: shift/reduce conflict (shift 20(0), red'n 4(0)) on '='
-49: shift/reduce conflict (shift 18(0), red'n 4(0)) on AND
-49: shift/reduce conflict (shift 19(0), red'n 4(0)) on OR
-state 49
+50: shift/reduce conflict (shift 20(0), red'n 4(0)) on '='
+50: shift/reduce conflict (shift 18(0), red'n 4(0)) on AND
+50: shift/reduce conflict (shift 19(0), red'n 4(0)) on OR
+state 50
 	boolItem:  boolItem.AND boolItem 
 	boolItem:  boolItem.OR boolItem 
 	boolItem:  boolItem OR boolItem.    (4)
@@ -676,10 +690,10 @@ state 49
 	.  reduce 4 (src line 45)
 
 
-50: shift/reduce conflict (shift 20(0), red'n 5(0)) on '='
-50: shift/reduce conflict (shift 18(0), red'n 5(0)) on AND
-50: shift/reduce conflict (shift 19(0), red'n 5(0)) on OR
-state 50
+51: shift/reduce conflict (shift 20(0), red'n 5(0)) on '='
+51: shift/reduce conflict (shift 18(0), red'n 5(0)) on AND
+51: shift/reduce conflict (shift 19(0), red'n 5(0)) on OR
+state 51
 	boolItem:  boolItem.AND boolItem 
 	boolItem:  boolItem.OR boolItem 
 	boolItem:  boolItem.'=' boolItem 
@@ -691,9 +705,9 @@ state 50
 	.  reduce 5 (src line 49)
 
 
-51: shift/reduce conflict (shift 21(0), red'n 14(0)) on AND
-51: shift/reduce conflict (shift 22(0), red'n 14(0)) on OR
-state 51
+52: shift/reduce conflict (shift 21(0), red'n 14(0)) on AND
+52: shift/reduce conflict (shift 22(0), red'n 14(0)) on OR
+state 52
 	res:  res.AND res 
 	res:  res AND res.    (14)
 	res:  res.OR res 
@@ -703,9 +717,9 @@ state 51
 	.  reduce 14 (src line 86)
 
 
-52: shift/reduce conflict (shift 30(0), red'n 10(0)) on AND
-52: shift/reduce conflict (shift 31(0), red'n 10(0)) on OR
-state 52
+53: shift/reduce conflict (shift 30(0), red'n 10(0)) on AND
+53: shift/reduce conflict (shift 31(0), red'n 10(0)) on OR
+state 53
 	res:  item.    (10)
 	res:  item.AND item 
 	res:  item.OR item 
@@ -715,14 +729,14 @@ state 52
 	.  reduce 10 (src line 69)
 
 
-state 53
+state 54
 	res:  '('.res ')' 
 	exprstr:  '('.exprstr ')' 
 	numItem:  '('.item ')' 
 	expr3:  '('.expr ')' 
 
 	'!'  shift 6
-	'('  shift 53
+	'('  shift 54
 	'-'  shift 12
 	PARAM  shift 17
 	STRPARAM  shift 15
@@ -734,14 +748,14 @@ state 53
 	expr3  goto 16
 	exprstr  goto 26
 	exprstr1  goto 13
-	res  goto 79
-	item  goto 80
+	res  goto 81
+	item  goto 82
 	numItem  goto 7
 	strItem  goto 8
 
-54: shift/reduce conflict (shift 21(0), red'n 15(0)) on AND
-54: shift/reduce conflict (shift 22(0), red'n 15(0)) on OR
-state 54
+55: shift/reduce conflict (shift 21(0), red'n 15(0)) on AND
+55: shift/reduce conflict (shift 22(0), red'n 15(0)) on OR
+state 55
 	res:  res.AND res 
 	res:  res.OR res 
 	res:  res OR res.    (15)
@@ -751,236 +765,242 @@ state 54
 	.  reduce 15 (src line 90)
 
 
-state 55
+state 56
 	boolItem:  '(' boolItem ')'.    (6)
 
 	.  reduce 6 (src line 53)
 
 
- 56: reduce/reduce conflict  (red'ns 9 and 30) on $end
- 56: reduce/reduce conflict  (red'ns 9 and 30) on '='
- 56: reduce/reduce conflict  (red'ns 9 and 30) on ')'
- 56: reduce/reduce conflict  (red'ns 9 and 30) on AND
- 56: reduce/reduce conflict  (red'ns 9 and 30) on OR
-state 56
+ 57: reduce/reduce conflict  (red'ns 9 and 31) on $end
+ 57: reduce/reduce conflict  (red'ns 9 and 31) on '='
+ 57: reduce/reduce conflict  (red'ns 9 and 31) on ')'
+ 57: reduce/reduce conflict  (red'ns 9 and 31) on AND
+ 57: reduce/reduce conflict  (red'ns 9 and 31) on OR
+state 57
 	boolItem:  '(' item ')'.    (9)
-	numItem:  '(' item ')'.    (30)
+	numItem:  '(' item ')'.    (31)
 
-	NOT  reduce 30 (src line 178)
+	NOT  reduce 31 (src line 182)
 	.  reduce 9 (src line 65)
 
 
-state 57
+state 58
 	res:  '(' res ')'.    (16)
 
 	.  reduce 16 (src line 94)
 
 
-state 58
-	exprstr:  '(' exprstr ')'.    (23)
-
-	.  reduce 23 (src line 129)
-
-
 state 59
-	expr3:  '(' expr ')'.    (40)
+	exprstr:  '(' exprstr ')'.    (24)
 
-	.  reduce 40 (src line 211)
+	.  reduce 24 (src line 133)
 
 
 state 60
+	expr3:  '(' expr ')'.    (41)
+
+	.  reduce 41 (src line 215)
+
+
+state 61
 	boolItem:  item '=' item.    (7)
 
 	.  reduce 7 (src line 57)
 
 
-state 61
+state 62
 	boolItem:  item NOT item.    (8)
 
 	.  reduce 8 (src line 61)
 
 
-state 62
+state 63
 	res:  item AND item.    (12)
 
 	.  reduce 12 (src line 78)
 
 
-state 63
+state 64
 	res:  item OR item.    (13)
 
 	.  reduce 13 (src line 82)
 
 
-state 64
+state 65
 	numItem:  '(' item.')' 
 
-	')'  shift 81
+	')'  shift 83
 	.  error
 
 
-state 65
-	numItem:  expr '>' expr.    (25)
-
-	.  reduce 25 (src line 135)
-
-
 state 66
-	numItem:  expr '<' expr.    (26)
+	numItem:  expr '>' expr.    (26)
 
-	.  reduce 26 (src line 144)
+	.  reduce 26 (src line 139)
 
 
 state 67
-	numItem:  expr '=' expr.    (27)
+	numItem:  expr '<' expr.    (27)
 
-	.  reduce 27 (src line 152)
+	.  reduce 27 (src line 148)
 
 
 state 68
-	numItem:  expr GE expr.    (28)
+	numItem:  expr '=' expr.    (28)
 
-	.  reduce 28 (src line 160)
+	.  reduce 28 (src line 156)
 
 
 state 69
-	numItem:  expr LE expr.    (29)
+	numItem:  expr GE expr.    (29)
 
-	.  reduce 29 (src line 169)
+	.  reduce 29 (src line 164)
 
 
 state 70
+	numItem:  expr LE expr.    (30)
+
+	.  reduce 30 (src line 173)
+
+
+state 71
 	strItem:  exprstr '=' exprstr.    (19)
 
 	.  reduce 19 (src line 107)
 
 
-state 71
+state 72
 	exprstr:  '('.exprstr ')' 
 
-	'('  shift 71
+	'('  shift 72
 	STRPARAM  shift 15
 	.  error
 
-	exprstr  goto 82
-	exprstr1  goto 13
-
-state 72
-	strItem:  exprstr IN '('.exprstr ')' 
-
-	'('  shift 71
-	STRPARAM  shift 15
-	.  error
-
-	exprstr  goto 83
+	exprstr  goto 84
 	exprstr1  goto 13
 
 state 73
-	expr1:  expr1 '+' expr2.    (34)
-	expr2:  expr2.'*' expr3 
-	expr2:  expr2.'/' expr3 
+	strItem:  exprstr NOT exprstr.    (20)
 
-	'*'  shift 46
-	'/'  shift 47
-	.  reduce 34 (src line 190)
+	.  reduce 20 (src line 112)
 
 
 state 74
-	expr1:  expr1 '-' expr2.    (35)
+	strItem:  exprstr IN '('.exprstr ')' 
+
+	'('  shift 72
+	STRPARAM  shift 15
+	.  error
+
+	exprstr  goto 85
+	exprstr1  goto 13
+
+state 75
+	expr1:  expr1 '+' expr2.    (35)
 	expr2:  expr2.'*' expr3 
 	expr2:  expr2.'/' expr3 
 
-	'*'  shift 46
-	'/'  shift 47
+	'*'  shift 47
+	'/'  shift 48
 	.  reduce 35 (src line 194)
 
 
-state 75
-	expr3:  '(' expr.')' 
-
-	')'  shift 59
-	.  error
-
-
 state 76
-	exprstr:  exprstr1 '+' exprstr1.    (22)
+	expr1:  expr1 '-' expr2.    (36)
+	expr2:  expr2.'*' expr3 
+	expr2:  expr2.'/' expr3 
 
-	.  reduce 22 (src line 125)
+	'*'  shift 47
+	'/'  shift 48
+	.  reduce 36 (src line 198)
 
 
 state 77
-	expr2:  expr2 '*' expr3.    (37)
+	expr3:  '(' expr.')' 
 
-	.  reduce 37 (src line 200)
+	')'  shift 60
+	.  error
 
 
 state 78
-	expr2:  expr2 '/' expr3.    (38)
+	exprstr:  exprstr1 '+' exprstr1.    (23)
+
+	.  reduce 23 (src line 129)
+
+
+state 79
+	expr2:  expr2 '*' expr3.    (38)
 
 	.  reduce 38 (src line 204)
 
 
-state 79
+state 80
+	expr2:  expr2 '/' expr3.    (39)
+
+	.  reduce 39 (src line 208)
+
+
+state 81
 	res:  res.AND res 
 	res:  res.OR res 
 	res:  '(' res.')' 
 
-	')'  shift 57
+	')'  shift 58
 	AND  shift 21
 	OR  shift 22
 	.  error
 
 
-80: shift/reduce conflict (shift 81(0), red'n 10(0)) on ')'
-80: shift/reduce conflict (shift 30(0), red'n 10(0)) on AND
-80: shift/reduce conflict (shift 31(0), red'n 10(0)) on OR
-state 80
+82: shift/reduce conflict (shift 83(0), red'n 10(0)) on ')'
+82: shift/reduce conflict (shift 30(0), red'n 10(0)) on AND
+82: shift/reduce conflict (shift 31(0), red'n 10(0)) on OR
+state 82
 	res:  item.    (10)
 	res:  item.AND item 
 	res:  item.OR item 
 	numItem:  '(' item.')' 
 
-	')'  shift 81
+	')'  shift 83
 	AND  shift 30
 	OR  shift 31
 	.  error
 
 
-state 81
-	numItem:  '(' item ')'.    (30)
-
-	.  reduce 30 (src line 178)
-
-
-state 82
-	exprstr:  '(' exprstr.')' 
-
-	')'  shift 58
-	.  error
-
-
 state 83
-	strItem:  exprstr IN '(' exprstr.')' 
+	numItem:  '(' item ')'.    (31)
 
-	')'  shift 84
-	.  error
+	.  reduce 31 (src line 182)
 
 
 state 84
-	strItem:  exprstr IN '(' exprstr ')'.    (20)
+	exprstr:  '(' exprstr.')' 
 
-	.  reduce 20 (src line 112)
+	')'  shift 59
+	.  error
+
+
+state 85
+	strItem:  exprstr IN '(' exprstr.')' 
+
+	')'  shift 86
+	.  error
+
+
+state 86
+	strItem:  exprstr IN '(' exprstr ')'.    (21)
+
+	.  reduce 21 (src line 116)
 
 
 21 terminals, 13 nonterminals
-41 grammar rules, 85/16000 states
+42 grammar rules, 87/16000 states
 30 shift/reduce, 5 reduce/reduce conflicts reported
 62 working sets used
-memory: parser 183/240000
+memory: parser 185/240000
 46 extra closures
-172 shift entries, 2 exceptions
-51 goto entries
-130 entries saved by goto default
-Optimizer space used: output 126/240000
-126 table entries, 1 zero
-maximum spread: 21, maximum offset: 72
+176 shift entries, 2 exceptions
+52 goto entries
+131 entries saved by goto default
+Optimizer space used: output 130/240000
+130 table entries, 2 zero
+maximum spread: 21, maximum offset: 74
