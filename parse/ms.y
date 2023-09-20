@@ -153,6 +153,10 @@ numItem:
 	  $$ = false
 	}
 	}
+|	expr NOT expr
+        {
+        $$ = $1 != $3
+        }
 |	expr '=' expr
 	{
 	if $1.Cmp($3) == 0 {

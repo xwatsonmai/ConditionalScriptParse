@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	line := []byte(`"asd" != "asd"`)
+	line := []byte(`"a" != "b"`)
 	result := parse.Parse(line)
 	if err := result.GetError(); err != nil {
 		fmt.Println("Error:", err)
