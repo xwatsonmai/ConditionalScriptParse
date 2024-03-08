@@ -19,34 +19,30 @@ type exprLex struct {
 const eof = 0
 
 func (x *exprLex) Lex(yylval *msSymType) int {
-	//var buff bytes.Buffer1
 	if len(x.line) == 0 {
-		//fmt.Println("eof 0 ")
 		return 0 //表示已经解析完所有的内容了
 	}
 	for {
 		c := x.next()
 		switch c {
 		case eof:
-			//fmt.Println("eof!")
 			return eof
 		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
-			//buff.WriteRune(c)
-			//fmt.Println("debug", string(c))
 			return x.num(c, yylval)
 		case 'a', 'o', 'i':
 			return x.symbol(c, yylval)
 		case '"':
-			//fmt.Println("debug string", string(c))
-			return x.string(c, yylval)
+			str, err := x.string(c, yylval)
+			if err != nil {
+				x.err = err
+				return 0
+			}
+			return str
 		case '!':
-			// 组合符号
 			if x.peek() == '=' {
 				x.pos++
 				return NOT
 			} else {
-				//x.err = errors.New(fmt.Sprintf("错误的!符号"))
-				//return 0
 				return int(c)
 			}
 		case '<', '>':
@@ -73,14 +69,18 @@ func (x *exprLex) Lex(yylval *msSymType) int {
 		case ' ', '\t', '\n', '\r':
 		default:
 			x.err = errors.New(fmt.Sprintf("unrecognized character %q", c))
-			//log.Printf("unrecognized character %q", c)
 			return 0
 		}
 	}
 }
 
 func (x *exprLex) Error(s string) {
-	x.err = errors.New(fmt.Sprintf("parse error: %s", s))
+	if x.err == nil {
+		x.err = errors.New(fmt.Sprintf("parse error: %s", s))
+	} else {
+		x.err = fmt.Errorf("parse error: %s,%w", s, x.err)
+	}
+	//x.err = errors.New(fmt.Sprintf("parse error: %s", s))
 	//log.Printf("parse error: %s", s)
 }
 
@@ -120,6 +120,7 @@ func (x *exprLex) num(c rune, yylval *msSymType) int {
 L:
 	for {
 		c = x.peek()
+
 		switch c {
 		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', 'e', 'E':
 			x.pos++
@@ -151,6 +152,7 @@ L:
 		c = x.peek()
 		switch c {
 		case 'n', 'd', 'r':
+			//fmt.Println("c", string(c))
 			x.pos++
 			add(&b, c)
 		default:
@@ -169,7 +171,7 @@ L:
 	}
 }
 
-func (x *exprLex) string(c rune, yylval *msSymType) int {
+func (x *exprLex) string(c rune, yylval *msSymType) (int, error) {
 	//add := func(b *bytes.Buffer, c rune) {
 	//	if _, err := b.WriteRune(c); err != nil {
 	//		log.Fatalf("WriteRune: %s", err)
@@ -179,6 +181,9 @@ func (x *exprLex) string(c rune, yylval *msSymType) int {
 L:
 	for {
 		c = x.next()
+		if c == eof {
+			return eof, errors.New(fmt.Sprintf("bad string end %q", string(b)))
+		}
 		switch c {
 		case '"':
 			break L
@@ -187,7 +192,7 @@ L:
 		}
 	}
 	yylval.strParam = string(b)
-	return STRPARAM
+	return STRPARAM, nil
 }
 
 //func SetResult(res bool) {

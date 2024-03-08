@@ -4,6 +4,7 @@ package parse
 import (
         "math/big"
         "strings"
+        //"fmt"
 )
 
 func setResult(l msLexer, v bool) {
@@ -20,7 +21,7 @@ array []*big.Rat
 
 %type <param> expr expr1 expr2 expr3
 %type <strParam> exprstr exprstr1
-%type <check> res item numItem strItem boolItem
+%type <check> item numItem strItem boolItem
 //%type <array> arrayExpr
 %token '>' '<' '=' '!' '(' ')' '+' '-' '*' '/'
 %token <param> PARAM
@@ -34,70 +35,46 @@ start:
 	setResult(mslex,$1)
 	}
 boolItem:
-	res
-	{
-	$$ = $1
-	}
-|	boolItem AND boolItem
-	{
-	$$ = $1 && $3
-	}
-|	boolItem OR boolItem
-	{
-	$$ = $1 || $3
-	}
-|	boolItem '=' boolItem
-	{
-	$$ = $1 == $3
-	}
+item
+ {
+ $$ = $1
+ }
 |	'(' boolItem ')'
-	{
-	$$ = $2
-	}
+        {
+        $$ = $2
+        }
+|	boolItem AND boolItem
+ {
+ $$ = $1 && $3
+ }
+|	boolItem OR boolItem
+ {
+ $$ = $1 || $3
+ }
+|	boolItem '=' boolItem
+ {
+ $$ = $1 == $3
+ }
+|	boolItem NOT boolItem
+ {
+ $$ = $1 != $3
+ }
 |	item '=' item
-	{
-	$$ = $1 == $3
-	}
+ {
+ $$ = $1 == $3
+ }
 |	item NOT item
-	{
-	$$ = $1 != $3
-	}
+ {
+ $$ = $1 != $3
+ }
 |	'(' item ')'
-	{
-	$$ = $2
-	}
-res:
-	item
-	{
-	$$ = $1
-	}
-|	'!' item
-	{
-	$$ = !$2
-	}
-|	item AND item
-	{
-	$$ = $1 && $3
-	}
-|	item OR item
-	{
-	$$ = $1 || $3
-	}
-|	res AND res
-	{
-	$$ = $1 && $3
-	}
-|	res OR res
-	{
-	$$ = $1 || $3
-	}
-|	'(' res ')'
-	{
-	$$ = $2
-	}
+ {
+ $$ = $2
+ }
 item:
 	numItem
 	{
+	// fmt.Println("numItem set",$1)
 	$$ = $1
 	}
 |	strItem
@@ -155,10 +132,16 @@ numItem:
 	}
 |	expr NOT expr
         {
-        $$ = $1 != $3
+        //fmt.Println("numItem not",$1,$3)
+	if $1.Cmp($3) == 0 {
+	  $$ = false
+	}else{
+	  $$ = true
+	}
         }
 |	expr '=' expr
 	{
+	//fmt.Println("numItem =",$1,$3)
 	if $1.Cmp($3) == 0 {
 	  $$ = true
 	}else{

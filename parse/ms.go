@@ -10,13 +10,14 @@ import __yyfmt__ "fmt"
 import (
 	"math/big"
 	"strings"
+	//"fmt"
 )
 
 func setResult(l msLexer, v bool) {
 	l.(*exprLex).result = v
 }
 
-//line ms.y:13
+//line ms.y:14
 type msSymType struct {
 	yys      int
 	param    *big.Rat
@@ -65,94 +66,83 @@ const msEofCode = 1
 const msErrCode = 2
 const msInitialStackSize = 16
 
-//line ms.y:223
+//line ms.y:206
 
 //line yacctab:1
 var msExca = [...]int8{
 	-1, 1,
 	1, -1,
 	-2, 0,
-	-1, 58,
-	16, 32,
-	-2, 9,
 }
 
 const msPrivate = 57344
 
-const msLast = 137
+const msLast = 103
 
 var msAct = [...]int8{
-	10, 15, 3, 16, 47, 26, 5, 25, 21, 22,
-	9, 24, 13, 32, 88, 27, 40, 40, 60, 14,
-	60, 30, 31, 45, 53, 56, 41, 41, 54, 54,
-	61, 42, 42, 46, 26, 62, 63, 64, 65, 17,
-	66, 73, 75, 20, 27, 67, 68, 69, 70, 71,
-	72, 85, 81, 82, 18, 19, 26, 79, 83, 76,
-	80, 1, 84, 77, 78, 85, 27, 34, 35, 37,
-	8, 2, 61, 30, 31, 86, 23, 87, 7, 36,
-	59, 11, 38, 39, 34, 35, 37, 0, 21, 22,
-	50, 51, 52, 0, 28, 0, 36, 58, 20, 38,
-	39, 57, 28, 0, 29, 30, 31, 48, 49, 18,
-	19, 0, 29, 30, 31, 6, 55, 6, 4, 12,
-	74, 12, 17, 15, 17, 15, 33, 15, 46, 12,
-	0, 12, 17, 15, 17, 43, 44,
+	8, 3, 14, 13, 39, 24, 23, 73, 7, 12,
+	11, 32, 51, 25, 51, 26, 27, 29, 20, 37,
+	52, 33, 46, 48, 72, 60, 34, 28, 21, 52,
+	30, 31, 13, 59, 61, 53, 54, 55, 56, 57,
+	58, 40, 41, 67, 68, 63, 64, 65, 24, 69,
+	66, 38, 26, 27, 29, 2, 25, 15, 62, 18,
+	22, 70, 49, 71, 28, 1, 32, 30, 31, 19,
+	16, 17, 42, 43, 44, 45, 33, 18, 35, 36,
+	38, 34, 20, 10, 6, 50, 15, 19, 16, 17,
+	47, 5, 21, 10, 9, 4, 15, 13, 10, 0,
+	0, 15, 13,
 }
 
 var msPact = [...]int16{
-	110, -1000, 37, -9, 110, 96, 118, -1000, -1000, 80,
-	10, 125, 120, -6, 95, -1000, -1000, -1000, 110, 110,
-	110, 108, 108, 92, 88, 71, 11, 63, 118, 118,
-	118, 118, -1000, 118, 120, 120, 120, 120, 120, 120,
-	112, 112, 51, 25, 25, -1000, 120, -14, 25, 25,
-	37, 37, 37, -9, 4, 108, -9, -1000, -1000, -1000,
-	-1000, -1000, -1000, -1000, -1000, -1000, 42, -1000, -1000, -1000,
-	-1000, -1000, -1000, -1000, 112, -1000, 112, 95, 95, 21,
-	-1000, -1000, -1000, 71, 56, -1000, 9, 5, -1000,
+	87, -1000, 71, 12, 87, -1000, -1000, 48, 60, 68,
+	72, -6, 29, -1000, -1000, -1000, 87, 87, 87, 87,
+	82, 82, 53, 76, 5, 11, 72, 72, 72, 72,
+	72, 72, 17, 17, 50, 43, 43, -1000, 72, -12,
+	43, 43, 71, 71, 71, 71, -1000, 82, -1000, -1000,
+	-1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
+	17, -1000, 17, 29, 29, 20, -1000, -1000, -1000, 15,
+	3, -2, -1000, -1000,
 }
 
 var msPgo = [...]int8{
-	0, 10, 81, 19, 3, 0, 12, 2, 6, 78,
-	70, 71, 61,
+	0, 8, 94, 9, 2, 0, 10, 1, 91, 84,
+	55, 65,
 }
 
 var msR1 = [...]int8{
-	0, 12, 11, 11, 11, 11, 11, 11, 11, 11,
-	7, 7, 7, 7, 7, 7, 7, 8, 8, 10,
-	10, 10, 5, 5, 5, 6, 9, 9, 9, 9,
-	9, 9, 9, 1, 1, 2, 2, 2, 3, 3,
-	3, 4, 4,
+	0, 11, 10, 10, 10, 10, 10, 10, 10, 10,
+	10, 7, 7, 9, 9, 9, 5, 5, 5, 6,
+	8, 8, 8, 8, 8, 8, 8, 1, 1, 2,
+	2, 2, 3, 3, 3, 4, 4,
 }
 
 var msR2 = [...]int8{
 	0, 1, 1, 3, 3, 3, 3, 3, 3, 3,
-	1, 2, 3, 3, 3, 3, 3, 1, 1, 3,
-	3, 5, 1, 3, 3, 1, 3, 3, 3, 3,
-	3, 3, 3, 1, 2, 1, 3, 3, 1, 3,
-	3, 1, 3,
+	3, 1, 1, 3, 3, 5, 1, 3, 3, 1,
+	3, 3, 3, 3, 3, 3, 3, 1, 2, 1,
+	3, 3, 1, 3, 3, 1, 3,
 }
 
 var msChk = [...]int16{
-	-1000, -12, -11, -7, 8, -8, 7, -9, -10, -1,
-	-5, -2, 11, -6, -3, 15, -4, 14, 17, 18,
-	6, 17, 18, -11, -8, -7, -5, -1, 6, 16,
-	17, 18, -8, 8, 4, 5, 16, 6, 19, 20,
-	6, 16, 21, 10, 11, -1, 8, 10, 12, 13,
-	-11, -11, -11, -7, -8, 8, -7, 9, 9, 9,
-	9, 9, -8, -8, -8, -8, -8, -1, -1, -1,
-	-1, -1, -1, -5, 8, -5, 8, -3, -3, -1,
-	-6, -4, -4, -7, -8, 9, -5, -5, 9,
+	-1000, -11, -10, -7, 8, -8, -9, -1, -5, -2,
+	11, -6, -3, 15, -4, 14, 17, 18, 6, 16,
+	6, 16, -10, -7, -5, -1, 4, 5, 16, 6,
+	19, 20, 6, 16, 21, 10, 11, -1, 8, 10,
+	12, 13, -10, -10, -10, -10, -7, 8, -7, 9,
+	9, 9, 9, -1, -1, -1, -1, -1, -1, -5,
+	8, -5, 8, -3, -3, -1, -6, -4, -4, -7,
+	-5, -5, 9, 9,
 }
 
 var msDef = [...]int8{
-	0, -2, 1, 2, 0, 10, 0, 17, 18, 0,
-	0, 33, 0, 22, 35, 25, 38, 41, 0, 0,
-	0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
-	0, 0, 11, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 34, 0, 0, 0, 0,
-	3, 4, 5, 14, 10, 0, 15, 6, -2, 16,
-	24, 42, 7, 8, 12, 13, 0, 26, 27, 28,
-	29, 30, 31, 19, 0, 20, 0, 36, 37, 0,
-	23, 39, 40, 0, 0, 32, 0, 0, 21,
+	0, -2, 1, 2, 0, 11, 12, 0, 0, 27,
+	0, 16, 29, 19, 32, 35, 0, 0, 0, 0,
+	0, 0, 0, 2, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 28, 0, 0,
+	0, 0, 4, 5, 6, 7, 8, 0, 9, 3,
+	10, 18, 36, 20, 21, 22, 23, 24, 25, 13,
+	0, 14, 0, 30, 31, 0, 17, 33, 34, 0,
+	0, 0, 26, 15,
 }
 
 var msTok1 = [...]int8{
@@ -512,127 +502,92 @@ msdefault:
 
 	case 1:
 		msDollar = msS[mspt-1 : mspt+1]
-//line ms.y:33
+//line ms.y:34
 		{
 			setResult(mslex, msDollar[1].check)
 		}
 	case 2:
 		msDollar = msS[mspt-1 : mspt+1]
-//line ms.y:38
+//line ms.y:39
 		{
 			msVAL.check = msDollar[1].check
 		}
 	case 3:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:42
+//line ms.y:43
 		{
-			msVAL.check = msDollar[1].check && msDollar[3].check
+			msVAL.check = msDollar[2].check
 		}
 	case 4:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:46
+//line ms.y:47
 		{
-			msVAL.check = msDollar[1].check || msDollar[3].check
+			msVAL.check = msDollar[1].check && msDollar[3].check
 		}
 	case 5:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:50
+//line ms.y:51
 		{
-			msVAL.check = msDollar[1].check == msDollar[3].check
+			msVAL.check = msDollar[1].check || msDollar[3].check
 		}
 	case 6:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:54
-		{
-			msVAL.check = msDollar[2].check
-		}
-	case 7:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:58
+//line ms.y:55
 		{
 			msVAL.check = msDollar[1].check == msDollar[3].check
 		}
-	case 8:
+	case 7:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:62
+//line ms.y:59
 		{
 			msVAL.check = msDollar[1].check != msDollar[3].check
 		}
+	case 8:
+		msDollar = msS[mspt-3 : mspt+1]
+//line ms.y:63
+		{
+			msVAL.check = msDollar[1].check == msDollar[3].check
+		}
 	case 9:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:66
+//line ms.y:67
+		{
+			msVAL.check = msDollar[1].check != msDollar[3].check
+		}
+	case 10:
+		msDollar = msS[mspt-3 : mspt+1]
+//line ms.y:71
 		{
 			msVAL.check = msDollar[2].check
 		}
-	case 10:
+	case 11:
 		msDollar = msS[mspt-1 : mspt+1]
-//line ms.y:71
+//line ms.y:76
 		{
+			// fmt.Println("numItem set",$1)
 			msVAL.check = msDollar[1].check
 		}
-	case 11:
-		msDollar = msS[mspt-2 : mspt+1]
-//line ms.y:75
-		{
-			msVAL.check = !msDollar[2].check
-		}
 	case 12:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:79
+		msDollar = msS[mspt-1 : mspt+1]
+//line ms.y:81
 		{
-			msVAL.check = msDollar[1].check && msDollar[3].check
+			msVAL.check = msDollar[1].check
 		}
 	case 13:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:83
-		{
-			msVAL.check = msDollar[1].check || msDollar[3].check
-		}
-	case 14:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:87
-		{
-			msVAL.check = msDollar[1].check && msDollar[3].check
-		}
-	case 15:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:91
-		{
-			msVAL.check = msDollar[1].check || msDollar[3].check
-		}
-	case 16:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:95
-		{
-			msVAL.check = msDollar[2].check
-		}
-	case 17:
-		msDollar = msS[mspt-1 : mspt+1]
-//line ms.y:100
-		{
-			msVAL.check = msDollar[1].check
-		}
-	case 18:
-		msDollar = msS[mspt-1 : mspt+1]
-//line ms.y:104
-		{
-			msVAL.check = msDollar[1].check
-		}
-	case 19:
-		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:109
+//line ms.y:86
 		{
 			msVAL.check = msDollar[1].strParam == msDollar[3].strParam
 		}
-	case 20:
+	case 14:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:113
+//line ms.y:90
 		{
 			msVAL.check = msDollar[1].strParam != msDollar[3].strParam
 		}
-	case 21:
+	case 15:
 		msDollar = msS[mspt-5 : mspt+1]
-//line ms.y:117
+//line ms.y:94
 		{
 			if strings.Index(msDollar[4].strParam, msDollar[1].strParam) != -1 {
 				msVAL.check = true
@@ -640,27 +595,27 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 22:
+	case 16:
 		msDollar = msS[mspt-1 : mspt+1]
-//line ms.y:126
+//line ms.y:103
 		{
 			msVAL.strParam = msDollar[1].strParam
 		}
-	case 23:
+	case 17:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:130
+//line ms.y:107
 		{
 			msVAL.strParam = msDollar[1].strParam + msDollar[3].strParam
 		}
-	case 24:
+	case 18:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:134
+//line ms.y:111
 		{
 			msVAL.strParam = msDollar[2].strParam
 		}
-	case 26:
+	case 20:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:141
+//line ms.y:118
 		{
 			if msDollar[1].param.Cmp(msDollar[3].param) == 1 {
 				msVAL.check = true
@@ -668,9 +623,9 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 27:
+	case 21:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:149
+//line ms.y:126
 		{
 			if msDollar[1].param.Cmp(msDollar[3].param) == -1 {
 				msVAL.check = true
@@ -678,25 +633,31 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 28:
+	case 22:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:157
+//line ms.y:134
 		{
-			msVAL.check = msDollar[1].param != msDollar[3].param
+			//fmt.Println("numItem not",$1,$3)
+			if msDollar[1].param.Cmp(msDollar[3].param) == 0 {
+				msVAL.check = false
+			} else {
+				msVAL.check = true
+			}
 		}
-	case 29:
+	case 23:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:161
+//line ms.y:143
 		{
+			//fmt.Println("numItem =",$1,$3)
 			if msDollar[1].param.Cmp(msDollar[3].param) == 0 {
 				msVAL.check = true
 			} else {
 				msVAL.check = false
 			}
 		}
-	case 30:
+	case 24:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:169
+//line ms.y:152
 		{
 			check := msDollar[1].param.Cmp(msDollar[3].param)
 			if check == 1 || check == 0 {
@@ -705,9 +666,9 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 31:
+	case 25:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:178
+//line ms.y:161
 		{
 			check := msDollar[1].param.Cmp(msDollar[3].param)
 			if check == -1 || check == 0 {
@@ -716,45 +677,45 @@ msdefault:
 				msVAL.check = false
 			}
 		}
-	case 32:
+	case 26:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:187
+//line ms.y:170
 		{
 			msVAL.check = msDollar[2].check
 		}
-	case 34:
+	case 28:
 		msDollar = msS[mspt-2 : mspt+1]
-//line ms.y:193
+//line ms.y:176
 		{
 			msVAL.param = msDollar[2].param.Neg(msDollar[2].param)
 		}
-	case 36:
+	case 30:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:199
+//line ms.y:182
 		{
 			msVAL.param = msDollar[1].param.Add(msDollar[1].param, msDollar[3].param)
 		}
-	case 37:
+	case 31:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:203
+//line ms.y:186
 		{
 			msVAL.param = msDollar[1].param.Sub(msDollar[1].param, msDollar[3].param)
 		}
-	case 39:
+	case 33:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:209
+//line ms.y:192
 		{
 			msVAL.param = msDollar[1].param.Mul(msDollar[1].param, msDollar[3].param)
 		}
-	case 40:
+	case 34:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:213
+//line ms.y:196
 		{
 			msVAL.param = msDollar[1].param.Quo(msDollar[1].param, msDollar[3].param)
 		}
-	case 42:
+	case 36:
 		msDollar = msS[mspt-3 : mspt+1]
-//line ms.y:220
+//line ms.y:203
 		{
 			msVAL.param = msDollar[2].param
 		}
