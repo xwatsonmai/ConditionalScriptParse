@@ -91,9 +91,14 @@ func TestParser(t *testing.T) {
 			output:  true,
 		},
 		{
-			input:   "\"禁言\" in (\"禁言\")",
+			input:   "\"禁言\" in (\"你被禁言了\")",
 			wantErr: "",
 			output:  true,
+		},
+		{
+			input:   `"\"是" = "是"`,
+			wantErr: "",
+			output:  false,
 		},
 	}
 	//parseHandler := &exprLex{}

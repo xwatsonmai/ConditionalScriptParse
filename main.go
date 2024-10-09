@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	line := []byte(`4.186655092592592< 5 `)
+	line := []byte(`"是"="是"`)
 	result := parse.Parse(line)
 	if err := result.GetError(); err != nil {
 		fmt.Println("Error:", err)

@@ -177,6 +177,7 @@ func (x *exprLex) string(c rune, yylval *msSymType) (int, error) {
 	//		log.Fatalf("WriteRune: %s", err)
 	//	}
 	//}
+	escaped := false
 	var b []rune
 L:
 	for {
@@ -184,7 +185,14 @@ L:
 		if c == eof {
 			return eof, errors.New(fmt.Sprintf("bad string end %q", string(b)))
 		}
+		if escaped {
+			b = append(b, c)
+			escaped = false
+			continue
+		}
 		switch c {
+		case '\\':
+			escaped = true
 		case '"':
 			break L
 		default:
